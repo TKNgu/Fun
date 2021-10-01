@@ -1,6 +1,8 @@
 #ifndef __HTTP_REQUEST_HPP__
 #define __HTTP_REQUEST_HPP__
 
+#define CURL_STATICLIB
+
 #include <string> 
 #include "curl/curl.h"
 

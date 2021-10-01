@@ -13,17 +13,17 @@ project(Fun LANGUAGES CXX)
 
 # CURL
 set(BUILD_CURL_EXE OFF)
-add_subdirectory(extention/curl-7.79.1)
+add_subdirectory(extensions/curl)
 
 # Source code
 file(GLOB SRC src/*.cpp src/*.hpp)
 
 # Include
 INCLUDE_DIRECTORIES(lib/include/
-	extention/curl-7.79.1/include/)
+        extensions/curl/include/)
 
 # Link
-LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)
+#LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)
 
 # Build
 add_executable(${CMAKE_PROJECT_NAME} ${SRC})
