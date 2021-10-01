@@ -1,0 +1,4 @@
+build/*
+extensions/*
+CMakeLists.txt.*
+!CMAkeList.txt
