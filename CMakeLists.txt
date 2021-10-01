@@ -11,23 +11,31 @@ set(CMAKE_EXE_LINKER_FLAGS)
 # Monitor Service.
 project(Fun LANGUAGES CXX)
 
+# Lib bin
+set(LIB_BIN lib/)
+find_library(OpenSSL openssl PATHS ${LIB_BIN})
+
 # CURL
 set(BUILD_CURL_EXE OFF)
 add_subdirectory(extensions/curl)
+
+# SFML
+add_subdirectory(extensions/sfml)
 
 # Source code
 file(GLOB SRC src/*.cpp src/*.hpp)
 
 # Include
 INCLUDE_DIRECTORIES(lib/include/
-        extensions/curl/include/)
+        extensions/curl/include/
+        extensions/sfml/include/)
 
 # Link
-#LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)
 
 # Build
 add_executable(${CMAKE_PROJECT_NAME} ${SRC})
-target_link_libraries(${CMAKE_PROJECT_NAME} curl)
+target_link_libraries(${CMAKE_PROJECT_NAME} curl sfml-graphics sfml-window sfml-system)
 
 # Run
 add_custom_target(run

@@ -1,3 +1,9 @@
 [submodule "extensions/curl"]
 	path = extensions/curl
 	url = https://github.com/curl/curl.git
+[submodule "extensions/openssl"]
+        path = extensions/openssl
+        url = https://github.com/openssl/openssl.git
+[submodule "extensions/sfml"]
+        path = extensions/sfml
+        url = https://github.com/SFML/SFML.git
