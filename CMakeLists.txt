@@ -20,20 +20,11 @@ set(CMAKE_CXX_FLAGS " -DIMGUI_IMPL_OPENGL_LOADER_GLAD")
 # GLFW
 add_subdirectory(extensions/glfw)
 
-# Lib bin
-set(LIB_BIN lib/)
-find_library(OpenSSL openssl PATHS ${LIB_BIN})
-
-# CURL
-set(BUILD_CURL_EXE OFF)
-add_subdirectory(extensions/curl)
-
 # Source code
 file(GLOB SRC src/*.cpp src/*.hpp extensions/glad/src/*.c)
 
 # Include
 INCLUDE_DIRECTORIES(lib/include/
-        extensions/curl/include/
         extensions/glfw/include/
         extensions/glad/include/)
 
@@ -42,8 +33,7 @@ LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)
 
 # Build
 add_executable(${CMAKE_PROJECT_NAME} ${SRC})
-#target_link_libraries(${CMAKE_PROJECT_NAME} curl glfw3 GL X11 pthread Xrandr Xi dl)
-target_link_libraries(${CMAKE_PROJECT_NAME} curl glfw)
+target_link_libraries(${CMAKE_PROJECT_NAME} glfw)
 
 # Run
 add_custom_target(run
