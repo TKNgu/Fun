@@ -3,8 +3,7 @@
 
 #define CURL_STATICLIB
 
-#include <string> 
-#include "curl/curl.h"
+#include <string>
 
 class HttpRequest {
 public:
@@ -12,7 +11,6 @@ public:
 	~HttpRequest();
 	std::string get(std::string);
 private:
-	CURL* curl;
 };
 
 #endif

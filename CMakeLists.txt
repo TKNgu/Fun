@@ -21,12 +21,12 @@ set(CMAKE_CXX_FLAGS " -DIMGUI_IMPL_OPENGL_LOADER_GLAD")
 add_subdirectory(extensions/glfw)
 
 # Source code
-file(GLOB SRC src/*.cpp src/*.hpp extensions/glad/src/*.c)
+file(GLOB SRC src/*.cpp src/*.hpp src/glad/src/*.c)
 
 # Include
 INCLUDE_DIRECTORIES(lib/include/
         extensions/glfw/include/
-        extensions/glad/include/)
+        src/glad/include/)
 
 # Link
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)
