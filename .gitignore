@@ -1,4 +1,5 @@
 build/*
-extensions/*
 CMakeLists.txt.*
 !CMAkeList.txt
+lib/
+*DS_Store

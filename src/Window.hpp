@@ -1,24 +1,24 @@
-#ifndef __WINDOW_HPP__
-#define __WINDOW_HPP__
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 
 #include <string>
-
-enum OpenGLType {GL3, GL4, GLES, VULKAN};
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 class Window {
 public:
-	Window(std::string = "Hello", OpenGLType = OpenGLType::GL3,
-		unsigned int = 640, unsigned int = 480,
-		unsigned int = 100, unsigned int = 100);
-	~Window();
-	void render() const;
+    Window(int, int,
+           int, std::string,
+           unsigned int, unsigned int,
+           GLFWmonitor*, GLFWwindow*);
+    ~Window();
+    bool getIsClose();
+    void swapBuffer();
+    void pollEvent();
 private:
-	std::string name;
-	const OpenGLType glType;
-	unsigned int width;
-	unsigned int height;
-	unsigned int x;
-	unsigned int y;
+    static void framebufferSizeCallback(GLFWwindow*, int, int);
+private:
+    GLFWwindow* pWindow;
 };
 
 #endif

@@ -3,19 +3,52 @@
 #include <iostream>
 using namespace std;
 
-Window::Window(string name, OpenGLType glType,
-	unsigned int width, unsigned int height,
-	unsigned int x, unsigned int y) : name(name), glType(glType),
-	width(width), height(height), x(x), y(y) {
-	cout << "Create Window " << this->name << " type " << this->glType << endl;
-	cout << "Size " << this->width << "x" << this->height << endl;
-	cout << "Offset " << this->x << "@" << this->y << endl;
+Window::Window(int versionMajor, int versionMinor,
+                    int openglProfile, string name,
+                    unsigned int width, unsigned int height,
+                    GLFWmonitor* monitor, GLFWwindow* share) {
+    if (glfwInit() == GLFW_FALSE) {
+        throw runtime_error("Failed to init GLFW");
+    }
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, versionMajor);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, versionMinor);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, openglProfile);
+
+#ifndef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+
+    this->pWindow = glfwCreateWindow(int(width), int(height), name.c_str(), monitor, share);
+    if (this->pWindow == nullptr) {
+        glfwTerminate();
+        throw runtime_error("Failed to create GLFW window");
+    }
+    glfwMakeContextCurrent(this->pWindow);
+    if (!gladLoadGLLoader(GLADloadproc(glfwGetProcAddress))) {
+        glfwTerminate();
+        throw runtime_error("Failed to initalize GLAD");
+    }
+    glViewport(0, 0, width, height);
+    glfwSetFramebufferSizeCallback(this->pWindow, Window::framebufferSizeCallback);
 }
 
 Window::~Window() {
-	cout << "Destroy " << this->name << endl;
+    glfwDestroyWindow(this->pWindow);
+    glfwTerminate();
 }
 
-void Window::render() const {
-	cout << "Render " << this->name << endl;
+bool Window::getIsClose() {
+    return glfwWindowShouldClose(this->pWindow);
+}
+
+void Window::swapBuffer() {
+    glfwSwapBuffers(this->pWindow);
+}
+
+void Window::pollEvent() {
+    glfwPollEvents();
+}
+
+void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
 }
