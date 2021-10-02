@@ -1,0 +1,6 @@
+[submodule "extensions/glm"]
+	path = extensions/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "extensions/glfw"]
+	path = extensions/glfw
+	url = https://github.com/glfw/glfw.git
