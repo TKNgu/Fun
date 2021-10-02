@@ -14,7 +14,7 @@ Window::Window(int versionMajor, int versionMinor,
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, versionMinor);
     glfwWindowHint(GLFW_OPENGL_PROFILE, openglProfile);
 
-#ifndef __APPLE__
+#ifndef __OSX__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
@@ -28,7 +28,6 @@ Window::Window(int versionMajor, int versionMinor,
         glfwTerminate();
         throw runtime_error("Failed to initalize GLAD");
     }
-    glViewport(0, 0, width, height);
     glfwSetFramebufferSizeCallback(this->pWindow, Window::framebufferSizeCallback);
 }
 

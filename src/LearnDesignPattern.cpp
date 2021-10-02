@@ -16,7 +16,14 @@ int main() {
         chrono::duration<double, ratio<1, FPS>> frameTime(1);
         chrono::time_point<chrono::high_resolution_clock> startTime;
 
-        Triangle triangle;
+        {
+            Triangle triangle;
+        }
+
+        cout << "Init" << endl;
+        Triangle triangle1;
+
+        Triangle triagle2;
 
         while (!window.getIsClose()) {
             startTime = chrono::high_resolution_clock::now();
@@ -24,7 +31,9 @@ int main() {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            triangle.render();
+            triangle1.render();
+
+            triagle2.render();
 
             window.swapBuffer();
             window.pollEvent();
