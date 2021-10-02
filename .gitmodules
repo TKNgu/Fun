@@ -1,9 +1,0 @@
-[submodule "extensions/glfw"]
-	path = extensions/glfw
-	url = https://github.com/glfw/glfw.git
-	branch = latest
-[submodule "extensions/glfm"]
-        path = extensions/glfm
-        url = https://github.com/g-truc/glm.git
-        branch = 0.9.9.8
-
