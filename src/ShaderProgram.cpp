@@ -1,9 +1,7 @@
 #include "ShaderProgram.hpp"
 
-#include <iostream>
 #include <stdexcept>
 #include <glad/glad.h>
-
 #include "Shader.hpp"
 
 using namespace std;
@@ -30,10 +28,9 @@ ShaderProgram::ShaderProgram(const string& vertexShaderSource,
 }
 
 ShaderProgram::~ShaderProgram() {
-    cout << "Delete program" << endl;
     glDeleteProgram(this->shaderProgram);
 }
 
-void ShaderProgram::use() {
+void ShaderProgram::use() const {
     glUseProgram(this->shaderProgram);
 }

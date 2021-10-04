@@ -6,7 +6,7 @@
 
 class Shader {
 public:
-    Shader(const GLenum, const std::string);
+    Shader(const GLenum, const std::string&);
     ~Shader();
 private:
     friend class ShaderProgram;

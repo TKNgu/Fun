@@ -4,3 +4,6 @@
 [submodule "extensions/glfw"]
 	path = extensions/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "extensions/stb"]
+	path = extensions/stb
+	url = https://github.com/nothings/stb.git

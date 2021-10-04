@@ -1,15 +1,19 @@
 #ifndef TRIANGLE_HPP
 #define TRIANGLE_HPP
 
+#include "DrawVertex.hpp"
+#include "glm/glm.hpp"
 #include "ShaderProgram.hpp"
 
-class Triangle {
+class Triangle : public DrawVertex {
 public:
-    Triangle();
-    void render();
+    Triangle(glm::vec3, glm::vec3, glm::vec3);
+    Triangle(glm::vec3, glm::vec3, glm::vec3,
+             glm::vec4, glm::vec4, glm::vec4);
+    void render() const override;
+    void setColor(glm::vec3, glm::vec3, glm::vec3);
 private:
-    static ShaderProgram BuildShaderProgram();
-    static ShaderProgram* shaderProgram;
+    static const ShaderProgram* shaderProgram;
 };
 
 #endif // TRIANGLE_HPP

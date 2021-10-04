@@ -2,11 +2,14 @@
 #include <string>
 #include <chrono>
 #include <thread>
-#include "WindowBuilder.hpp"
 #include "Window.hpp"
 #include "Triangle.hpp"
+#include "glm/glm.hpp"
+#include "Rectangle.hpp"
+#include "Resource.hpp"
 
 using namespace std;
+using namespace glm;
 
 #define FPS 60
 
@@ -15,15 +18,36 @@ int main() {
         auto window = WindowBuilder().setName("Fun Window").build();
         chrono::duration<double, ratio<1, FPS>> frameTime(1);
         chrono::time_point<chrono::high_resolution_clock> startTime;
+        auto resource = Resource::getInstance().setPath("resource");
 
-        {
-            Triangle triangle;
+        try {
+//            cout << resource.loadText("shader/Sample.vs") << endl;
+            const Texture& tmp = resource.loadTexture("ipad/sprite_sheet.png");
+//            resource.loadTexture("ipad/sprite_sheet.png");
+        } catch (runtime_error& e) {
+            cout << e.what() << endl;
         }
 
         cout << "Init" << endl;
-        Triangle triangle1;
+        Triangle triangle1({-0.5f, -0.5f, 0.0f},
+                           {0.5f, -0.5f, 0.0f},
+                           {0.0f,  0.5f, 0.0f});
 
-        Triangle triagle2;
+        Triangle triagle2({-0.5f, -0.5f, 0.0f},
+                          {0.5f, -0.5f, 0.0f},
+                          {1.0f,  0.5f, 0.0f},
+                          {0.7f,  0.235f, 0.171f, 1.0f},
+                          {0.7f,  0.235f, 0.171f, 1.0f},
+                          {0.7f,  0.235f, 0.171f, 1.0f});
+
+        Rectangle rectangle({0.5f, 0.5f, 1.0f},
+                            {0.0f, 0.5f, 1.0f},
+                            {0.0f, 0.0f, 1.0f},
+                            {0.5f, 0.0f, 1.0f},
+                            {0.7f,  0.235f, 0.171f, 1.0f},
+                            {0.7f,  0.235f, 0.171f, 1.0f},
+                            {0.7f,  0.235f, 0.171f, 1.0f},
+                            {0.4f,  0.5f, 0.71f, 1.0f});
 
         while (!window.getIsClose()) {
             startTime = chrono::high_resolution_clock::now();
@@ -34,6 +58,8 @@ int main() {
             triangle1.render();
 
             triagle2.render();
+
+            rectangle.render();
 
             window.swapBuffer();
             window.pollEvent();

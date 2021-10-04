@@ -1,8 +1,8 @@
 #Cmake version.
 cmake_minimum_required(VERSION 3.10.2)
 
-# C++ std 14.
-set(CMAKE_CXX_STANDARD 14)
+# C++ std 17.
+set(CMAKE_CXX_STANDARD 17)
 if (UNIX)
     set(CMAKE_EXE_LINKER_FLAGS "-no-pie")
 endif (UNIX)
@@ -10,6 +10,7 @@ set(CMAKE_EXE_LINKER_FLAGS)
 
 # Monitor Service.
 project(Fun LANGUAGES CXX C)
+#add_definitions(-DDEBUG_LINE)
 
 # OPENGL
 IF(APPLE)
@@ -29,7 +30,8 @@ file(GLOB SRC src/*.cpp src/*.hpp src/glad/src/*.c)
 # Include
 INCLUDE_DIRECTORIES(lib/include/
         extensions/glfw/include/
-        extensions/glfm/include/
+        extensions/glm/
+        extensions/stb/
         src/glad/include/)
 
 # Link

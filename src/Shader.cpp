@@ -7,7 +7,7 @@ using namespace std;
 
 #define LOG_SIZE 512
 
-Shader::Shader(const GLenum type, const string source):
+Shader::Shader(const GLenum type, const string& source):
     shader(glCreateShader(type)) {
     const auto tmp = source.c_str();
     glShaderSource(this->shader, 1, &tmp, nullptr);

@@ -8,7 +8,7 @@ class ShaderProgram
 public:
     ShaderProgram(const std::string&, const std::string&);
     ~ShaderProgram();
-    void use();
+    void use() const;
 private:
     unsigned int shaderProgram;
 };
