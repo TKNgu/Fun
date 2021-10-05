@@ -6,9 +6,6 @@
 class Texture {
 public:
     Texture(std::filesystem::path);
-    Texture(const Texture&);
-    Texture(const Texture&&);
-    Texture();
     ~Texture();
     Texture& operator = (const Texture&);
 private:

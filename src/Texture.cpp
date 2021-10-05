@@ -11,8 +11,7 @@ using namespace std;
 using namespace std::filesystem;
 
 Texture::Texture(path filePath) {
-    cout << "File" << endl;
-    auto data = stbi_load(filePath.c_str(),
+    auto data = stbi_load(filePath.string().c_str(),
                           &this->width, &this->height, &this->nrChannels, 0);
     if (!data) {
         throw runtime_error("Error open file " + filePath.string());
@@ -30,28 +29,6 @@ Texture::Texture(path filePath) {
     stbi_image_free(data);
 }
 
-Texture::Texture(const Texture& texture) :
-    width(texture.width), height(texture.height), nrChannels(texture.nrChannels), texture(texture.texture) {
-    cout << "Copy" << endl;
-}
-
-Texture::Texture(const Texture&& texture) {
-    cout << "Clone" << endl;
-}
-
-Texture::Texture() {
-    cout << "Empty" << endl;
-}
-
 Texture::~Texture() {
-    cout << "Destroy" << endl;
     glDeleteTextures(1, &this->texture);
-}
-
-Texture& Texture::operator = (const Texture& texture) {
-    cout << "=" << endl;
-    this->width = texture.texture;
-    this->height = texture.height;
-    this->nrChannels = texture.nrChannels;
-    return *this;
 }

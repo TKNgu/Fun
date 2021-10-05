@@ -1,5 +1,6 @@
 #include "OpenGLUtility.hpp"
 
+#include <filesystem>
 #include "Resource.hpp"
 
 using namespace std;
@@ -18,6 +19,6 @@ const ShaderProgram& OpenGLUtility::BuildSimpleShaderProgram() {
         "}\0";
 
     auto resource = Resource::getInstance();
-    static auto tmp = ShaderProgram(resource.loadText( "shader/Sample.vs") , resource.loadText("shader/Sample.fs"));
+    static auto tmp = ShaderProgram(resource.loadText("shader/Sample.vs"), resource.loadText("shader/Sample.fs"));
     return tmp;
 }

@@ -21,9 +21,11 @@ int main() {
         auto resource = Resource::getInstance().setPath("resource");
 
         try {
-//            cout << resource.loadText("shader/Sample.vs") << endl;
             const Texture& tmp = resource.loadTexture("ipad/sprite_sheet.png");
-//            resource.loadTexture("ipad/sprite_sheet.png");
+            resource.loadTexture("ipad/sprite_sheet.png");
+            resource.loadTexture("ipad/bg.png");
+            resource.loadTexture("ipad/font.png");
+            resource.loadTexture("ipad/sprite_sheet.png");
         } catch (runtime_error& e) {
             cout << e.what() << endl;
         }

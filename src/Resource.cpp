@@ -14,6 +14,12 @@ Resource& Resource::getInstance() {
     return instance;
 }
 
+Resource::~Resource() {
+    for (auto& item : this->cacheTexture) {
+        delete item.second;
+    }
+}
+
 Resource::Resource() {
     //TODO
 }
@@ -27,7 +33,7 @@ const string& Resource::loadText(path filePath) {
     auto fullFilePath = this->basePath / filePath;
     if (this->cacheText.find(filePath) == this->cacheText.end()) {
         ifstream file(fullFilePath.string());
-        file.exceptions (ifstream::failbit | ifstream::badbit);
+        //file.exceptions (ifstream::failbit | ifstream::badbit);
         if (!file.is_open()) {
             throw runtime_error("Error open file " + fullFilePath.string());
         }
@@ -42,8 +48,8 @@ const string& Resource::loadText(path filePath) {
 const Texture& Resource::loadTexture(path filePath) {
     auto fullFilePath = this->basePath / filePath;
     if (this->cacheTexture.find(filePath) == this->cacheTexture.end()) {
-        Texture texture(fullFilePath);
-        this->cacheTexture[filePath] = texture;
+        auto texture = new const Texture(fullFilePath);
+        this->cacheTexture.insert({ filePath, texture });
     }
-    return this->cacheTexture[filePath];
+    return *this->cacheTexture[filePath];
 }
