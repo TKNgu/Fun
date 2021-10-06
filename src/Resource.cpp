@@ -6,6 +6,8 @@
 #include <sstream>
 #include <iostream>
 
+#include "OpenGLUtility.hpp"
+
 using namespace std;
 using namespace std::filesystem;
 
@@ -32,15 +34,7 @@ Resource& Resource::setPath(path basePath) {
 const string& Resource::loadText(path filePath) {
     auto fullFilePath = this->basePath / filePath;
     if (this->cacheText.find(filePath) == this->cacheText.end()) {
-        ifstream file(fullFilePath.string());
-        file.exceptions (ifstream::failbit | ifstream::badbit);
-        if (!file.is_open()) {
-            throw runtime_error("Error open file " + fullFilePath.string());
-        }
-        stringstream strStream;
-        strStream << file.rdbuf();
-        file.close();
-        this->cacheText[filePath] = strStream.str();
+        this->cacheText[filePath] = loadFileText(fullFilePath);
     }
     return this->cacheText[filePath];
 }
@@ -54,11 +48,14 @@ const Texture& Resource::loadTexture(path filePath) {
     return *this->cacheTexture[filePath];
 }
 
-const ShaderProgram& Resource::buildShaderProgram(string name) {
-    static path shaderBasePath("shader");
-    if (this->cacheShaderProgram.find(name) == this->cacheShaderProgram.end()) {
-        auto shaderProgram = new ShaderProgram(loadText(shaderBasePath / path(name + ".vs")), loadText(shaderBasePath / path(name + ".fs")));
-        this->cacheShaderProgram.insert({name, shaderProgram});
+string Resource::loadFileText(filesystem::path filePath) {
+    ifstream file(filePath);
+    file.exceptions(ifstream::failbit | ifstream::badbit);
+    if (!file.is_open()){
+        throw runtime_error("Error open file " + filePath.string());
     }
-    return *this->cacheShaderProgram[name];
+    stringstream strStream;
+    strStream << file.rdbuf();
+    file.close();
+    return strStream.str();
 }

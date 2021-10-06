@@ -6,12 +6,12 @@
 
 #include "Resource.hpp"
 #include "ShaderProgram.hpp"
+#include "OpenGLUtility.hpp"
 
 using namespace std;
 using namespace glm;
 
-Triangle::Triangle(vec3 a, vec3 b, vec3 c) : DrawVertex(),
-    shaderProgram(Resource::getInstance().buildShaderProgram("sample"))  {
+Triangle::Triangle(vec3 a, vec3 b, vec3 c) : DrawVertex() {
 
     float vertices[] = {
         a.x, a.y, a.z,
@@ -25,8 +25,7 @@ Triangle::Triangle(vec3 a, vec3 b, vec3 c) : DrawVertex(),
 }
 
 Triangle::Triangle(vec3 a, vec3 b, vec3 c,
-                   vec4 aC, vec4 bC, vec4 cC) : DrawVertex(),
-    shaderProgram(Resource::getInstance().buildShaderProgram("sample"))  {
+                   vec4 aC, vec4 bC, vec4 cC) : DrawVertex() {
 
     float vertices[] = {
         a.x, a.y, a.z, aC.r, aC.g, aC.b, aC.a,
@@ -43,7 +42,8 @@ Triangle::Triangle(vec3 a, vec3 b, vec3 c,
 
 
 void Triangle::render() const {
-    this->shaderProgram.use();
+    static auto shaderProgram = OpenGLUtility::BuildSimpleShaderProgram();
+    shaderProgram.use();
     DrawVertex::bindVertexArray();
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }

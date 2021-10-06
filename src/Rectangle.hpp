@@ -3,7 +3,6 @@
 
 #include <glm/glm.hpp>
 #include "DrawVertex.hpp"
-#include "ShaderProgram.hpp"
 
 class Rectangle : public DrawVertex {
 public:
@@ -13,7 +12,6 @@ public:
     ~Rectangle();
     void render() const override;
 private:
-    static const ShaderProgram* shaderProgram;
     unsigned int EBO;
 };
 

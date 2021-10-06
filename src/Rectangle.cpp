@@ -4,11 +4,7 @@
 
 using namespace glm;
 
-const ShaderProgram* Rectangle::shaderProgram = nullptr;
-
 Rectangle::Rectangle(vec3 a, vec3 b, vec3 c, vec3 d) : DrawVertex() {
-    static const ShaderProgram& tmp = OpenGLUtility::BuildSimpleShaderProgram();
-    Rectangle::shaderProgram = &tmp;
 
     float vertices[] = {
         a.x, a.y, a.z,
@@ -33,8 +29,6 @@ Rectangle::Rectangle(vec3 a, vec3 b, vec3 c, vec3 d) : DrawVertex() {
 
 Rectangle::Rectangle(vec3 a, vec3 b, vec3 c, vec3 d,
                      vec4 aC, vec4 bC, vec4 cC, vec4 dC) : DrawVertex() {
-    static const ShaderProgram& tmp = OpenGLUtility::BuildSimpleShaderProgram();
-    Rectangle::shaderProgram = &tmp;
 
     float vertices[] = {
         a.x, a.y, a.z, aC.r, aC.g, aC.b, aC.a,
@@ -64,7 +58,8 @@ Rectangle::~Rectangle() {
 }
 
 void Rectangle::render() const {
-    Rectangle::shaderProgram->use();
+    static auto shaderProgram = OpenGLUtility::BuildSimpleShaderProgram();
+    shaderProgram.use();
     DrawVertex::bindVertexArray();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

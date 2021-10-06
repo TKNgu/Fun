@@ -7,6 +7,7 @@
 #include "glm/glm.hpp"
 #include "Rectangle.hpp"
 #include "Resource.hpp"
+#include "Sprite.hpp"
 
 using namespace std;
 using namespace glm;
@@ -51,6 +52,11 @@ int main() {
                             {0.7f,  0.235f, 0.171f, 1.0f},
                             {0.4f,  0.5f, 0.71f, 1.0f});
 
+        auto sprite = Sprite({-0.5f, -0.5f, 1.0f},
+                             {0.0f, -0.5f, 1.0f},
+                             {0.0f, 0.0f, 1.0f},
+                             {-0.5f, 0.0f, 1.0f});
+
         while (!window.getIsClose()) {
             startTime = chrono::high_resolution_clock::now();
 
@@ -62,6 +68,8 @@ int main() {
             triagle2.render();
 
             rectangle.render();
+
+            sprite.render();
 
             window.swapBuffer();
             window.pollEvent();

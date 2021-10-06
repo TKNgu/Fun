@@ -3,7 +3,6 @@
 
 #include "DrawVertex.hpp"
 #include "glm/glm.hpp"
-#include "ShaderProgram.hpp"
 
 class Triangle : public DrawVertex {
 public:
@@ -12,8 +11,6 @@ public:
              glm::vec4, glm::vec4, glm::vec4);
     void render() const override;
     void setColor(glm::vec3, glm::vec3, glm::vec3);
-private:
-    const ShaderProgram& shaderProgram;
 };
 
 #endif // TRIANGLE_HPP

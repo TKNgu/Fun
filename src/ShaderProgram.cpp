@@ -1,5 +1,6 @@
 #include "ShaderProgram.hpp"
 
+#include <iostream>
 #include <stdexcept>
 #include <glad/glad.h>
 #include "Shader.hpp"
