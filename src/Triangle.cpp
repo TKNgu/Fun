@@ -4,17 +4,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "Resource.hpp"
 #include "ShaderProgram.hpp"
-#include "OpenGLUtility.hpp"
 
 using namespace std;
 using namespace glm;
 
-const ShaderProgram* Triangle::shaderProgram = nullptr;
-
-Triangle::Triangle(vec3 a, vec3 b, vec3 c) : DrawVertex() {
-    static const ShaderProgram& tmp = OpenGLUtility::BuildSimpleShaderProgram();
-    Triangle::shaderProgram = &tmp;
+Triangle::Triangle(vec3 a, vec3 b, vec3 c) : DrawVertex(),
+    shaderProgram(Resource::getInstance().buildShaderProgram("sample"))  {
 
     float vertices[] = {
         a.x, a.y, a.z,
@@ -28,9 +25,8 @@ Triangle::Triangle(vec3 a, vec3 b, vec3 c) : DrawVertex() {
 }
 
 Triangle::Triangle(vec3 a, vec3 b, vec3 c,
-                   vec4 aC, vec4 bC, vec4 cC) : DrawVertex() {
-    static const ShaderProgram& tmp = OpenGLUtility::BuildSimpleShaderProgram();
-    Triangle::shaderProgram = &tmp;
+                   vec4 aC, vec4 bC, vec4 cC) : DrawVertex(),
+    shaderProgram(Resource::getInstance().buildShaderProgram("sample"))  {
 
     float vertices[] = {
         a.x, a.y, a.z, aC.r, aC.g, aC.b, aC.a,
@@ -47,7 +43,7 @@ Triangle::Triangle(vec3 a, vec3 b, vec3 c,
 
 
 void Triangle::render() const {
-    Triangle::shaderProgram->use();
+    this->shaderProgram.use();
     DrawVertex::bindVertexArray();
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }

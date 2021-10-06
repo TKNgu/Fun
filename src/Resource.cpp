@@ -33,7 +33,7 @@ const string& Resource::loadText(path filePath) {
     auto fullFilePath = this->basePath / filePath;
     if (this->cacheText.find(filePath) == this->cacheText.end()) {
         ifstream file(fullFilePath.string());
-        //file.exceptions (ifstream::failbit | ifstream::badbit);
+        file.exceptions (ifstream::failbit | ifstream::badbit);
         if (!file.is_open()) {
             throw runtime_error("Error open file " + fullFilePath.string());
         }
@@ -52,4 +52,13 @@ const Texture& Resource::loadTexture(path filePath) {
         this->cacheTexture.insert({ filePath, texture });
     }
     return *this->cacheTexture[filePath];
+}
+
+const ShaderProgram& Resource::buildShaderProgram(string name) {
+    static path shaderBasePath("shader");
+    if (this->cacheShaderProgram.find(name) == this->cacheShaderProgram.end()) {
+        auto shaderProgram = new ShaderProgram(loadText(shaderBasePath / path(name + ".vs")), loadText(shaderBasePath / path(name + ".fs")));
+        this->cacheShaderProgram.insert({name, shaderProgram});
+    }
+    return *this->cacheShaderProgram[name];
 }

@@ -1,11 +1,14 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
 
+#include <glm/glm.hpp>
+#include "Rectangle.hpp"
 
-class Sprite
-{
+class Sprite : public Rectangle {
 public:
-    Sprite();
+    Sprite(glm::vec3, glm::vec3, glm::vec3, glm::vec3);
+    ~Sprite();
+//    void render() conts override;
 };
 
 #endif // SPRITE_HPP

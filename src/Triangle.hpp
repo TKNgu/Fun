@@ -13,7 +13,7 @@ public:
     void render() const override;
     void setColor(glm::vec3, glm::vec3, glm::vec3);
 private:
-    static const ShaderProgram* shaderProgram;
+    const ShaderProgram& shaderProgram;
 };
 
 #endif // TRIANGLE_HPP
