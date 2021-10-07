@@ -11,6 +11,7 @@ using namespace std;
 using namespace std::filesystem;
 
 Texture::Texture(path filePath) {
+    //stbi_set_flip_vertically_on_load(true);
     auto data = stbi_load(filePath.string().c_str(),
                           &this->width, &this->height, &this->nrChannels, 0);
     if (!data) {
@@ -24,11 +25,29 @@ Texture::Texture(path filePath) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, this->nrChannels, this->width, this->height,
-                 0, this->nrChannels, GL_UNSIGNED_BYTE, data);
+    switch (nrChannels) {
+    case 3: {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->width, this->height,
+            0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        break;
+    }
+    case 4: {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->width, this->height,
+            0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        break;
+    }
+    default: {
+        stbi_image_free(data);
+        throw runtime_error("Image format not support");
+    }
+    }
     stbi_image_free(data);
 }
 
 Texture::~Texture() {
     glDeleteTextures(1, &this->texture);
+}
+
+void Texture::bind() const {
+    glBindTexture(GL_TEXTURE_2D, this->texture);
 }

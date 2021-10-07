@@ -7,7 +7,7 @@ class Texture {
 public:
     Texture(std::filesystem::path);
     ~Texture();
-    Texture& operator = (const Texture&);
+    void bind() const;
 private:
     int width;
     int height;
