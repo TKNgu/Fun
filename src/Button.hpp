@@ -3,11 +3,11 @@
 
 #include "UI.hpp"
 
-class Button : public UI {
+class Button {
 public:
 	Button();
 	virtual ~Button();
-	virtual std::string getName() const override;
+    virtual std::string getName() const;
 };
 
 #endif

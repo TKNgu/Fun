@@ -57,9 +57,13 @@ Rectangle::~Rectangle() {
     glDeleteBuffers(1, &this->EBO);
 }
 
-void Rectangle::render() const {
+void Rectangle::render(mat4) const {
     static auto shaderProgram = OpenGLUtility::BuildSimpleShaderProgram();
     shaderProgram.use();
     DrawVertex::bindVertexArray();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+void Rectangle::update(float) {
+    //TODO
 }

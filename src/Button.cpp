@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Button::Button() : UI() {
+Button::Button() {
 	cout << "Init button" << endl;
 }
 

@@ -8,6 +8,7 @@
 #include "Rectangle.hpp"
 #include "Resource.hpp"
 #include "Sprite.hpp"
+#include "UIContainer.hpp"
 
 using namespace std;
 using namespace glm;
@@ -21,55 +22,63 @@ int main() {
         chrono::time_point<chrono::high_resolution_clock> startTime;
         auto resource = Resource::getInstance().setPath("resource");
 
-        try {
-            const Texture& tmp = resource.loadTexture("ipad/sprite_sheet.png");
-            resource.loadTexture("ipad/sprite_sheet.png");
-            resource.loadTexture("ipad/bg.png");
-            resource.loadTexture("ipad/font.png");
-            resource.loadTexture("ipad/sprite_sheet.png");
-        } catch (runtime_error& e) {
-            cout << e.what() << endl;
-        }
+        UIContainer container;
 
-        cout << "Init" << endl;
-        Triangle triangle1({-0.5f, -0.5f, 0.0f},
-                           {0.5f, -0.5f, 0.0f},
-                           {0.0f,  0.5f, 0.0f});
-
-        Triangle triagle2({-0.5f, -0.5f, 0.0f},
-                          {0.5f, -0.5f, 0.0f},
-                          {1.0f,  0.5f, 0.0f},
-                          {0.7f,  0.235f, 0.171f, 1.0f},
-                          {0.7f,  0.235f, 0.171f, 1.0f},
-                          {0.7f,  0.235f, 0.171f, 1.0f});
-
-        Rectangle rectangle({0.5f, 0.5f, 1.0f},
-                            {0.0f, 0.5f, 1.0f},
-                            {0.0f, 0.0f, 1.0f},
-                            {0.5f, 0.0f, 1.0f},
-                            {0.7f,  0.235f, 0.171f, 1.0f},
-                            {0.7f,  0.235f, 0.171f, 1.0f},
-                            {0.7f,  0.235f, 0.171f, 1.0f},
-                            {0.4f,  0.5f, 0.71f, 1.0f});
-
-        auto sprite = Sprite(Resource::getInstance().loadTexture("ipad/sprite_sheet.png"));
-        sprite.translate(glm::vec3(1.0f, 1.0f, 0.0f));
-//        sprite.rotate(45.0f);
+        Sprite& sprite = static_cast<Sprite&>(container.add(
+                            new Sprite(Resource::getInstance().loadTexture("ipad/sprite_sheet.png"))));
         sprite.scale(vec3(0.5f, 0.5f, 1.0f));
 
+        Triangle& triangle = static_cast<Triangle&>(container.add(
+                            new Triangle({-0.5f, -0.5f, 0.0f},
+                                        {0.5f, -0.5f, 0.0f},
+                                        {0.0f,  0.5f, 0.0f})));
+        triangle.rotate(45.0f);
+
+//        cout << "Init" << endl;
+//        Triangle triangle1({-0.5f, -0.5f, 0.0f},
+//                           {0.5f, -0.5f, 0.0f},
+//                           {0.0f,  0.5f, 0.0f});
+
+//        Triangle triagle2({-0.5f, -0.5f, 0.0f},
+//                          {0.5f, -0.5f, 0.0f},
+//                          {1.0f,  0.5f, 0.0f},
+//                          {0.7f,  0.235f, 0.171f, 1.0f},
+//                          {0.7f,  0.235f, 0.171f, 1.0f},
+//                          {0.7f,  0.235f, 0.171f, 1.0f});
+
+//        Rectangle rectangle({0.5f, 0.5f, 1.0f},
+//                            {0.0f, 0.5f, 1.0f},
+//                            {0.0f, 0.0f, 1.0f},
+//                            {0.5f, 0.0f, 1.0f},
+//                            {0.7f,  0.235f, 0.171f, 1.0f},
+//                            {0.7f,  0.235f, 0.171f, 1.0f},
+//                            {0.7f,  0.235f, 0.171f, 1.0f},
+//                            {0.4f,  0.5f, 0.71f, 1.0f});
+
+//        auto sprite = Sprite(Resource::getInstance().loadTexture("ipad/sprite_sheet.png"));
+//        sprite.translate(glm::vec3(1.0f, 1.0f, 0.0f));
+//        sprite.rotate(45.0f);
+//        sprite.scale(vec3(0.5f, 0.5f, 1.0f));
+
+//        Sprite& wall = dynamic_cast<Sprite&>(rectangle.add(new Sprite(Resource::getInstance().loadTexture("wall.jpg"))));
+//        wall.scale(vec3(0.25f, 0.25f, 0.0f));
+
+        glm::mat4 renderMat = glm::mat4(1.0f);
         while (!window.getIsClose()) {
             startTime = chrono::high_resolution_clock::now();
 
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-//            triangle1.render();
+//            triangle1.render(renderMap);
 
-//            triagle2.render();
+//            triagle2.render(renderMap);
 
-//            rectangle.render();
+//            rectangle.render(renderMap);
 
-            sprite.render();
+//            sprite.render(renderMap);
+
+            container.render(renderMat);
 
             window.swapBuffer();
             window.pollEvent();

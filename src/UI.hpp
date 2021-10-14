@@ -6,8 +6,7 @@
 class UI {
 public:
 	UI();
-	virtual ~UI();
-	virtual std::string getName() const = 0;
+    virtual ~UI();
 };
 
 #endif

@@ -39,12 +39,10 @@ void ShaderProgram::use() const {
 }
 
 void ShaderProgram::setUniform(mat4 mat, string name) {
-//    unsigned int matLoc = glGetUniformLocation(this->shaderProgram, name.c_str());
-    unsigned int matLoc = glGetUniformLocation(shaderProgram, "transform");
+    unsigned int matLoc = glGetUniformLocation(this->shaderProgram, name.c_str());
     if (matLoc < 0) {
         throw runtime_error("Not found key");
     }
-    glUniformMatrix4fv(matLoc, 1, true, glm::value_ptr(mat));
-//    glUniformMatrix4fv(matLoc, 1, false, glm::value_ptr(mat));
+    glUniformMatrix4fv(matLoc, 1, false, glm::value_ptr(mat));
 
 }

@@ -15,15 +15,15 @@ FactoryUI::~FactoryUI() {
 }
 
 UI* FactoryUI::createUI(UIType type) {
-	switch (type) {
-	case UIType::ButtonType: {
-		return new Button;
-	}
-	case UIType::CheckBoxType: {
-		return new CheckBox;
-	}
-	default: {
-		return nullptr;
-	}
-	}
+//	switch (type) {
+//	case UIType::ButtonType: {
+//		return new Button;
+//	}
+//	case UIType::CheckBoxType: {
+//		return new CheckBox;
+//	}
+//	default: {
+//		return nullptr;
+//	}
+//	}
 }

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-CheckBox::CheckBox() : UI() {
+CheckBox::CheckBox() {
 	cout << "Contructor Check Box" << endl;
 }
 

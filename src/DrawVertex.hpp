@@ -3,16 +3,16 @@
 
 #include <type_traits>
 #include <glad/glad.h>
+#include "UIComponent.hpp"
 
-class DrawVertex {
+class DrawVertex : public UIComponent {
 public:
     DrawVertex();
     virtual ~DrawVertex();
-    virtual void render() const = 0;
 protected:
     void bindVertexArray() const;
     void bufferData(float*, const std::size_t&) const;
-
+protected:
     unsigned int VAO;
     unsigned int VBO;
 };

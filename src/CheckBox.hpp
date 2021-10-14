@@ -3,11 +3,11 @@
 
 #include "UI.hpp"
 
-class CheckBox : public UI {
+class CheckBox {
 public:
 	CheckBox();
 	~CheckBox();
-	std::string getName() const override;
+    std::string getName() const;
 };
 
 #endif

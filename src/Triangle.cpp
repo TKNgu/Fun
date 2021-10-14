@@ -40,10 +40,15 @@ Triangle::Triangle(vec3 a, vec3 b, vec3 c,
     glEnableVertexAttribArray(1);
 }
 
-
-void Triangle::render() const {
+void Triangle::render(mat4 renderMat) const {
+    renderMat *= this->modelMat;
     static auto shaderProgram = OpenGLUtility::BuildSimpleShaderProgram();
     shaderProgram.use();
+    shaderProgram.setUniform(renderMat, "transform");
     DrawVertex::bindVertexArray();
     glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+void Triangle::update(float) {
+    //TODO
 }
