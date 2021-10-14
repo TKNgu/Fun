@@ -52,10 +52,10 @@ int main() {
                             {0.7f,  0.235f, 0.171f, 1.0f},
                             {0.4f,  0.5f, 0.71f, 1.0f});
 
-        auto sprite = Sprite({-0.5f, -0.5f, 1.0f},
-                             {0.0f, -0.5f, 1.0f},
-                             {0.0f, 0.0f, 1.0f},
-                             {-0.5f, 0.0f, 1.0f});
+        auto sprite = Sprite(Resource::getInstance().loadTexture("ipad/sprite_sheet.png"));
+        sprite.translate(glm::vec3(1.0f, 1.0f, 0.0f));
+//        sprite.rotate(45.0f);
+        sprite.scale(vec3(0.5f, 0.5f, 1.0f));
 
         while (!window.getIsClose()) {
             startTime = chrono::high_resolution_clock::now();
@@ -63,11 +63,11 @@ int main() {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            triangle1.render();
+//            triangle1.render();
 
-            triagle2.render();
+//            triagle2.render();
 
-            rectangle.render();
+//            rectangle.render();
 
             sprite.render();
 

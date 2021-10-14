@@ -11,7 +11,7 @@ using namespace std;
 using namespace std::filesystem;
 
 Texture::Texture(path filePath) {
-    //stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(true);
     auto data = stbi_load(filePath.string().c_str(),
                           &this->width, &this->height, &this->nrChannels, 0);
     if (!data) {

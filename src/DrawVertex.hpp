@@ -12,7 +12,7 @@ public:
 protected:
     void bindVertexArray() const;
     void bufferData(float*, const std::size_t&) const;
-private:
+
     unsigned int VAO;
     unsigned int VBO;
 };

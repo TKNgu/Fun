@@ -3,9 +3,11 @@
 #include <iostream>
 #include <stdexcept>
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "Shader.hpp"
 
 using namespace std;
+using namespace glm;
 
 #define LOG_SIZE 512
 
@@ -34,4 +36,15 @@ ShaderProgram::~ShaderProgram() {
 
 void ShaderProgram::use() const {
     glUseProgram(this->shaderProgram);
+}
+
+void ShaderProgram::setUniform(mat4 mat, string name) {
+//    unsigned int matLoc = glGetUniformLocation(this->shaderProgram, name.c_str());
+    unsigned int matLoc = glGetUniformLocation(shaderProgram, "transform");
+    if (matLoc < 0) {
+        throw runtime_error("Not found key");
+    }
+    glUniformMatrix4fv(matLoc, 1, true, glm::value_ptr(mat));
+//    glUniformMatrix4fv(matLoc, 1, false, glm::value_ptr(mat));
+
 }

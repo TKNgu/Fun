@@ -2,16 +2,21 @@
 #define SPRITE_HPP
 
 #include <glm/glm.hpp>
-#include "Rectangle.hpp"
+#include "DrawVertex.hpp"
+#include "Texture.hpp"
 
-class Sprite : public Rectangle {
+class Sprite : public DrawVertex {
 public:
-    Sprite(glm::vec3, glm::vec3, glm::vec3, glm::vec3);
+    Sprite(const Texture&);
     ~Sprite();
     void render() const override;
+    void translate(glm::vec3);
+    void rotate(float, glm::vec3 = glm::vec3(0.0f, 0.0f, 1.0f));
+    void scale(glm::vec3);
 private:
     unsigned int EBO;
-//    void render() conts override;
+    const Texture& texture;
+    glm::mat4 modelMat = glm::mat4(1.0f);
 };
 
 #endif // SPRITE_HPP
