@@ -24,11 +24,11 @@ int main() {
 
         UIContainer container;
 
-        Sprite& sprite = static_cast<Sprite&>(container.add(
+        auto& sprite = static_cast<Sprite&>(container.add(
                             new Sprite(Resource::getInstance().loadTexture("ipad/sprite_sheet.png"))));
         sprite.scale(vec3(0.5f, 0.5f, 1.0f));
 
-        Triangle& triangle = static_cast<Triangle&>(container.add(
+        auto& triangle = static_cast<Triangle&>(container.add(
                             new Triangle({-0.5f, -0.5f, 0.0f},
                                         {0.5f, -0.5f, 0.0f},
                                         {0.0f,  0.5f, 0.0f})));
