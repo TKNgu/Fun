@@ -24,15 +24,27 @@ add_subdirectory(extensions/glfw)
 ## GLM
 #add_subdirectory(extensions/glm)
 
+## Source code
+#file(GLOB SRC src/*.cpp src/*.hpp src/glad/src/*.c extensions/nanovg/src/*.c extensions/nanovg/example/demo.c extensions/nanovg/example/perf.c)
+
 # Source code
-file(GLOB SRC src/*.cpp src/*.hpp src/glad/src/*.c)
+file(GLOB SRC src/Fun.cpp src/glad/src/*.c extensions/nanovg/src/*.c extensions/nanovg/example/demo.c extensions/nanovg/example/perf.c)
+
+## Include
+#INCLUDE_DIRECTORIES(lib/include/
+#        extensions/glfw/include/
+#        extensions/glm/
+#        extensions/stb/
+#        src/glad/include/
+#        extensions/nanovg/src/
+#        extensions/nanovg/example/)
 
 # Include
-INCLUDE_DIRECTORIES(lib/include/
-        extensions/glfw/include/
+INCLUDE_DIRECTORIES(
         extensions/glm/
-        extensions/stb/
-        src/glad/include/)
+        src/glad/include/
+        extensions/nanovg/src/
+        extensions/nanovg/example/)
 
 # Link
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib/lib/)

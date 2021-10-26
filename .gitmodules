@@ -7,3 +7,6 @@
 [submodule "extensions/glm"]
 	path = extensions/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "extensions/nanovg"]
+	path = extensions/nanovg
+	url = https://github.com/memononen/nanovg
