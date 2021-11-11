@@ -10,8 +10,7 @@ public:
     Triangle(glm::vec3, glm::vec3, glm::vec3,
              glm::vec4, glm::vec4, glm::vec4);
     void setColor(glm::vec3, glm::vec3, glm::vec3);
-    void update(float) override;
-    void render(glm::mat4) const override;
+    void render() const override;
 };
 
 #endif // TRIANGLE_HPP

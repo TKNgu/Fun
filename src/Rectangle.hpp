@@ -10,8 +10,7 @@ public:
     Rectangle(glm::vec3, glm::vec3, glm::vec3, glm::vec3,
               glm::vec4, glm::vec4, glm::vec4, glm::vec4);
     ~Rectangle();
-    void update(float) override;
-    void render(glm::mat4) const override;
+    void render() const override;
 private:
     unsigned int EBO;
 };

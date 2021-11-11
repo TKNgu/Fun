@@ -9,9 +9,11 @@
 class UIContainer : public UIComponent {
 public:
     ~UIContainer();
+//    void updateRenderMat(std::function<glm::mat4 (glm::mat4)>) override;
     UIComponent& add(UIComponent*);
-    void update(float) override;
-    void render(glm::mat4) const override;
+    void render() const override;
+protected:
+    void updateRenderMat() override;
 private:
     std::vector<UIComponent*> childrend;
 };

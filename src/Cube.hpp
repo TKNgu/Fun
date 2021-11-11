@@ -6,8 +6,7 @@
 class Cube : public DrawVertex {
 public:
     Cube();
-    void update(float) override;
-    void render(glm::mat4) const override;
+    void render() const override;
 };
 
 #endif // CUBE_HPP

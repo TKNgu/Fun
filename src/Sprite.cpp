@@ -39,18 +39,13 @@ Sprite::~Sprite() {
     glDeleteBuffers(1, &this->EBO);
 }
 
-void Sprite::render(mat4 renderMat) const {
-    renderMat *= this->modelMat;
+void Sprite::render() const {
     static auto shaderProgram = ShaderProgram(Resource::getInstance().loadText("shader/Texture.vs"),
         Resource::getInstance().loadText("shader/Texture.fs"));
     shaderProgram.use();
-    shaderProgram.setUniform(renderMat, "transform");
+    shaderProgram.setUniform(this->renderMat, "transform");
     glActiveTexture(GL_TEXTURE0);
     this->texture.bind();
     glBindVertexArray(this->VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-}
-
-void Sprite::update(float) {
-    //TODO
 }
