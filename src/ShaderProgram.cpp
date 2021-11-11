@@ -44,5 +44,4 @@ void ShaderProgram::setUniform(mat4 mat, string name) {
         throw runtime_error("Not found key");
     }
     glUniformMatrix4fv(matLoc, 1, false, glm::value_ptr(mat));
-
 }
