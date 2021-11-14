@@ -28,7 +28,13 @@ int main() {
         static auto window = WindowBuilder().setName("Fun Window").build();
         chrono::duration<double, ratio<1, FPS>> frameTime(1);
         chrono::time_point<chrono::high_resolution_clock> startTime;
+
+#ifdef _WIN32
+        auto resource = Resource::getInstance().setPath("../../../resource");
+#else
         auto resource = Resource::getInstance().setPath("resource");
+#endif
+
 
         glm::mat4 view = glm::mat4(1.0f);
         view = glm::translate(view, glm::vec3(0.0f, 0.0f, -10.0f));
