@@ -11,13 +11,8 @@ UIContainer::~UIContainer() {
     }
 }
 
-//void UIContainer::updateRenderMat(std::function<glm::mat4 (glm::mat4)> transforms) {
-//    Execute(this->childrend, [&transforms](UIComponent* ui) {
-//        ui->updateRenderMat(transforms);
-//    });
-//}
-
 UIComponent& UIContainer::add(UIComponent *ui) {
+    ui->setViewMat(this->renderMat);
     this->childrend.push_back(ui);
     return *ui;
 }

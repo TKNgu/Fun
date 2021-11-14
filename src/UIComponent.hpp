@@ -4,14 +4,13 @@
 #include <functional>
 #include <glm/glm.hpp>
 
+using TransformsFunction = std::function<glm::mat4 (glm::mat4)>;
+
 class UIComponent {
 public:
     virtual ~UIComponent();
     void setViewMat(glm::mat4);
-    virtual void transforms(std::function<glm::mat4 (glm::mat4)>);
-//    void translate(glm::vec3);
-//    void rotate(float, glm::vec3 = glm::vec3(0.0f, 0.0f, 1.0f));
-//    void scale(glm::vec3);
+    virtual void transforms(TransformsFunction);
     virtual void render() const = 0;
 protected:
     virtual void updateRenderMat();

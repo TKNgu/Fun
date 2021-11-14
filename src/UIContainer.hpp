@@ -9,7 +9,6 @@
 class UIContainer : public UIComponent {
 public:
     ~UIContainer();
-//    void updateRenderMat(std::function<glm::mat4 (glm::mat4)>) override;
     UIComponent& add(UIComponent*);
     void render() const override;
 protected:
